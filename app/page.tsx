@@ -10,7 +10,7 @@ import ImpresionCarnet from "@/components/ui/ImpresionCarnet"
 
 
 const obtenerDatosPaciente = async (dni: string): Promise<Paciente> => {
-  const response = await fetch(`http://192.168.1.5:3000/api/patients/${dni}`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}/api/patients/${dni}`)
   if (!response.ok) {
     throw new Error("No se encontró el paciente")
   }
@@ -55,7 +55,7 @@ export default function ConsultaPaciente() {
     const htmlContent = ImpresionCarnet({ paciente }) // Genera el HTML
   
     try {
-      const response = await fetch("http://192.168.1.5:3000/api/patients/generate-pdf", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}/api/patients/generate-pdf`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
