@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Consulta Paciente App',
-  description: 'Carnet de identificacion para pacientes del hospital Espinar',
+  title: "Sistema de Carnet y Vacunación",
+  description: "Aplicación para gestionar carnets y registros de vacunación, del hospital Espinar",
 }
 
 export default function RootLayout({

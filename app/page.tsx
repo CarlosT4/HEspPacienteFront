@@ -32,6 +32,7 @@ export default function ConsultaPaciente() {
   const [paciente, setPaciente] = useState<Paciente | null>(null)
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState("")
+  const [cargandoPDF, setCargandoPDF] = useState(false)
 
   const consultarPaciente = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,7 +52,8 @@ export default function ConsultaPaciente() {
 
   const imprimirDatos = async () => {
     if (!paciente) return
-  
+    setCargandoPDF(true) 
+
     const htmlContent = ImpresionCarnet({ paciente }) // Genera el HTML
   
     try {
@@ -77,6 +79,8 @@ export default function ConsultaPaciente() {
       window.URL.revokeObjectURL(url)
     } catch (error) {
       console.error("Error al descargar el PDF:", error)
+    } finally {
+      setCargandoPDF(false) 
     }
   }
   
@@ -114,7 +118,9 @@ export default function ConsultaPaciente() {
               <p><strong>Apellido Paterno:</strong> {paciente.apellidoPaterno}</p>
               <p><strong>Apellido Materno:</strong> {paciente.apellidoMaterno}</p>
               <p><strong>Edad:</strong> {paciente.edad}</p>
-              <Button onClick={imprimirDatos}>Imprimir Datos</Button>
+              <Button onClick={imprimirDatos} disabled={cargandoPDF}>
+                {cargandoPDF ? "Generando PDF..." : "Imprimir Carnet"}
+              </Button>
             </div>
           )}
         </CardContent>
