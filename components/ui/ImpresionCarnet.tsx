@@ -1,4 +1,4 @@
-import { Paciente } from "@/types/paciente"
+import { Paciente } from "@/types/pacienteCarnet"
 
 interface ImpresionCarnetProps {
   paciente: Paciente
