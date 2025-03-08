@@ -5,12 +5,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { AlertCircle, CalendarIcon, FileText, Loader2, PrinterIcon, SearchIcon, Syringe, User } from "lucide-react"
+import { AlertCircle, CalendarIcon, FileText, Info, Loader2, SearchIcon, Syringe, User } from "lucide-react"
 import { format, parse } from "date-fns"
 import { es } from "date-fns/locale"
 import type { Paciente } from "@/types/pacienteVacunacion"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const obtenerEsquemaVacunacionPaciente = async (dni: string): Promise<Paciente> => {
     const response = await fetch(
@@ -87,10 +87,6 @@ export function VacunacionForm() {
         }
     }
 
-    const handlePrint = () => {
-        window.print()
-    }
-
     return (
         <div className="container mx-auto p-4">
             <Card className="w-full max-w-4xl mx-auto shadow-lg print:shadow-none">
@@ -141,90 +137,123 @@ export function VacunacionForm() {
 
                     {paciente && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {/* Columna de información personal */}
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-2 border-b pb-2">
-                                        <FileText className="h-5 w-5 text-primary" />
-                                        <h2 className="text-xl font-semibold text-primary">Información del Paciente</h2>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-1">
-                                            <p className="text-sm text-muted-foreground">Historia Clínica</p>
-                                            <p className="font-medium">{paciente.nroHistoriaClinica}</p>
-                                        </div>
-                                        <div className="space-y-1">
-                                            <p className="text-sm text-muted-foreground">Edad</p>
-                                            <p className="font-medium">{paciente.edad}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-1">
-                                        <p className="text-sm text-muted-foreground">Nombre Completo</p>
-                                        <p className="font-medium">
-                                            {paciente.primerNombre} {paciente.segundoNombre} {paciente.apellidoPaterno}{" "}
-                                            {paciente.apellidoMaterno}
-                                        </p>
-                                    </div>
-
-                                    <div className="space-y-1">
-                                        <p className="text-sm text-muted-foreground">Fecha de Nacimiento</p>
-                                        <p className="font-medium flex items-center gap-2">
-                                            <CalendarIcon size={16} className="text-muted-foreground" />
-                                            {formatearFecha(paciente.fechaNacimiento)}
-                                        </p>
-                                    </div>
+                            {/* Información del paciente */}
+                            <div>
+                                <div className="flex items-center gap-2 border-b pb-2 mb-4">
+                                    <FileText className="h-5 w-5 text-primary" />
+                                    <h2 className="text-xl font-semibold text-primary">Información del Paciente</h2>
                                 </div>
 
-                                {/* Columna de esquema de vacunación */}
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-2 border-b pb-2">
-                                        <Syringe className="h-5 w-5 text-primary" />
-                                        <h2 className="text-xl font-semibold text-primary">Esquema de Vacunación</h2>
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <div className="space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-1">
+                                                <p className="text-sm text-muted-foreground">Historia Clínica</p>
+                                                <p className="font-medium">{paciente.nroHistoriaClinica}</p>
+                                            </div>
+                                            <div className="space-y-1">
+                                                <p className="text-sm text-muted-foreground">Edad</p>
+                                                <p className="font-medium">{paciente.edad}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <p className="text-sm text-muted-foreground">Nombre Completo</p>
+                                            <p className="font-medium">
+                                                {paciente.primerNombre} {paciente.segundoNombre} {paciente.apellidoPaterno}{" "}
+                                                {paciente.apellidoMaterno}
+                                            </p>
+                                        </div>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <div>
-                                            <p className="text-sm text-muted-foreground mb-2">Vacunas Recomendadas</p>
-                                            {paciente.vacunasRecomendadas.length > 0 ? (
-                                                <div className="flex flex-wrap gap-2">
-                                                    {paciente.vacunasRecomendadas.map((vacuna, index) => (
-                                                        <Badge
-                                                            key={index}
-                                                            variant="outline"
-                                                            className="bg-green-50 text-green-700 border-green-200 flex items-center gap-1 px-3 py-1"
-                                                        >
-                                                            <Syringe size={14} />
-                                                            {vacuna}
-                                                        </Badge>
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <p className="text-muted-foreground italic">No hay vacunas recomendadas</p>
-                                            )}
-                                        </div>
-
-                                        <div className="space-y-2 pt-2">
-                                            <p className="text-sm text-muted-foreground">Periodo de Vacunación</p>
-                                            <div className="grid grid-cols-2 gap-4 mt-1">
-                                                <div className="space-y-1">
-                                                    <p className="text-xs text-muted-foreground">Desde</p>
-                                                    <p className="font-medium">{formatearFecha(paciente.fechaInicio)}</p>
-                                                </div>
-                                                <div className="space-y-1">
-                                                    <p className="text-xs text-muted-foreground">Hasta</p>
-                                                    <p className="font-medium">{formatearFecha(paciente.fechaFin)}</p>
-                                                </div>
-                                            </div>
+                                        <div className="space-y-1">
+                                            <p className="text-sm text-muted-foreground">Fecha de Nacimiento</p>
+                                            <p className="font-medium flex items-center gap-2">
+                                                <CalendarIcon size={16} className="text-muted-foreground" />
+                                                {formatearFecha(paciente.fechaNacimiento)}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Sección de vacunas recomendadas */}
+                            <div>
+                                <div className="flex items-center gap-2 border-b pb-2 mb-4">
+                                    <Syringe className="h-5 w-5 text-green-600" />
+                                    <h2 className="text-xl font-semibold text-primary">Vacunas Recomendadas</h2>
+                                </div>
+
+                                {paciente.vacunasRecomendadas.length > 0 ? (
+                                    <div className="grid gap-3">
+                                        <TooltipProvider>
+                                            {paciente.vacunasRecomendadas.map((vacuna, index) => (
+                                                <Card key={index} className="overflow-hidden border-green-100">
+                                                    {/* Encabezado de la tarjeta con nombre de vacuna e icono */}
+                                                    <div className="bg-green-50 p-3 flex items-center gap-2 border-b border-green-100">
+                                                        <Syringe className="h-4 w-4 text-green-700 flex-shrink-0" />
+                                                        <h3 className="font-medium text-green-800 flex-1">{vacuna.nombre}</h3>
+                                                        <Tooltip>
+                                                            <TooltipTrigger asChild>
+                                                                <Button variant="ghost" size="icon" className="h-6 w-6 text-green-700 flex-shrink-0">
+                                                                    <Info className="h-4 w-4" />
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent className="max-w-xs bg-white">
+                                                                <p>{vacuna.descripcion}</p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </div>
+
+                                                    {/* Contenido de la tarjeta */}
+                                                    <div className="p-3 bg-white">
+                                                        {/* Descripción de la vacuna */}
+                                                        <p className="text-sm text-gray-600">{vacuna.descripcion}</p>
+
+                                                        {/* Periodo de vacunación */}
+                                                        <div className="mt-3 pt-3 border-t border-gray-100">
+                                                            <div className="flex items-center gap-1 mb-2">
+                                                                <CalendarIcon size={14} className="text-green-700" />
+                                                                <span className="text-sm font-medium text-green-800">Periodo de vacunación</span>
+                                                            </div>
+                                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full">
+                                                                        Desde
+                                                                    </span>
+                                                                    <span className="text-gray-700">{formatearFecha(paciente.fechaInicio)}</span>
+                                                                </div>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full">
+                                                                        Hasta
+                                                                    </span>
+                                                                    <span className="text-gray-700">{formatearFecha(paciente.fechaFin)}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Card>
+                                            ))}
+                                        </TooltipProvider>
+                                    </div>
+                                ) : (
+                                    <p className="text-muted-foreground italic">No hay vacunas recomendadas</p>
+                                )}
+                            </div>
                         </div>
                     )}
                 </CardContent>
+
+                {paciente && (
+                    <CardFooter className="bg-muted/20 border-t">
+                        <p className="text-sm text-muted-foreground">
+                            Consulta realizada el {format(new Date(), "d 'de' MMMM 'de' yyyy", { locale: es })}
+                        </p>
+                    </CardFooter>
+                )}
             </Card>
         </div>
     )
 }
+
