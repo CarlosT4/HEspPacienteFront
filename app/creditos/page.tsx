@@ -8,7 +8,6 @@ export default function CreditosPage() {
             <Card className="border-2">
                 <CardHeader className="text-center">
                     <CardTitle className="text-2xl">Créditos</CardTitle>
-                    <CardDescription>Información del desarrollador</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="flex justify-center">
@@ -22,15 +21,14 @@ export default function CreditosPage() {
                     </div>
 
                     <div className="space-y-2 text-center">
-                        <h2 className="text-xl font-bold">Nombre del Desarrollador</h2>
+                        <h2 className="text-xl font-bold">CarlosT4</h2>
                         <p className="text-muted-foreground">Desarrollador Full Stack</p>
                     </div>
 
                     <div className="space-y-2">
                         <h3 className="font-medium">Sobre mí</h3>
                         <p className="text-sm text-muted-foreground">
-                            Desarrollador con experiencia en aplicaciones web y móviles. Especializado en React, Next.js y desarrollo
-                            de aplicaciones para el sector salud.
+                            Desarrollador con experiencia en aplicaciones web y móviles. Especializado en React y Next.js.
                         </p>
                     </div>
 
@@ -41,12 +39,11 @@ export default function CreditosPage() {
                             <span className="rounded-full bg-primary/10 px-3 py-1 text-xs">React</span>
                             <span className="rounded-full bg-primary/10 px-3 py-1 text-xs">TypeScript</span>
                             <span className="rounded-full bg-primary/10 px-3 py-1 text-xs">Tailwind CSS</span>
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs">shadcn/ui</span>
                         </div>
                     </div>
 
                     <div className="flex justify-center space-x-4">
-                        <Link href="https://github.com/" className="text-muted-foreground hover:text-primary">
+                        <Link href="https://github.com/CarlosT4" className="text-muted-foreground hover:text-primary">
                             <Github className="h-5 w-5" />
                             <span className="sr-only">GitHub</span>
                         </Link>
@@ -54,13 +51,9 @@ export default function CreditosPage() {
                             <Linkedin className="h-5 w-5" />
                             <span className="sr-only">LinkedIn</span>
                         </Link>
-                        <Link href="mailto:correo@ejemplo.com" className="text-muted-foreground hover:text-primary">
+                        <Link href="mailto:ctc3486@gmail.com" className="text-muted-foreground hover:text-primary">
                             <Mail className="h-5 w-5" />
                             <span className="sr-only">Email</span>
-                        </Link>
-                        <Link href="https://ejemplo.com" className="text-muted-foreground hover:text-primary">
-                            <Globe className="h-5 w-5" />
-                            <span className="sr-only">Sitio web</span>
                         </Link>
                     </div>
                 </CardContent>
