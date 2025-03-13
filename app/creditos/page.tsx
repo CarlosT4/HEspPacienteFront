@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, Globe } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function CreditosPage() {
@@ -8,6 +8,7 @@ export default function CreditosPage() {
             <Card className="border-2">
                 <CardHeader className="text-center">
                     <CardTitle className="text-2xl">Créditos</CardTitle>
+                    <CardDescription>Información del desarrollador</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="flex justify-center">
@@ -42,19 +43,25 @@ export default function CreditosPage() {
                         </div>
                     </div>
 
-                    <div className="flex justify-center space-x-4">
-                        <Link href="https://github.com/CarlosT4" className="text-muted-foreground hover:text-primary">
-                            <Github className="h-5 w-5" />
-                            <span className="sr-only">GitHub</span>
-                        </Link>
-                        <Link href="https://linkedin.com/" className="text-muted-foreground hover:text-primary">
-                            <Linkedin className="h-5 w-5" />
-                            <span className="sr-only">LinkedIn</span>
-                        </Link>
-                        <Link href="mailto:ctc3486@gmail.com" className="text-muted-foreground hover:text-primary">
-                            <Mail className="h-5 w-5" />
-                            <span className="sr-only">Email</span>
-                        </Link>
+                    <div className="space-y-3 mt-4">
+                        <div className="flex items-center gap-2">
+                            <Github className="h-5 w-5 text-muted-foreground" />
+                            <Link href="https://github.com/CarlosT4" className="text-sm hover:underline">
+                                github.com/CarlosT4
+                            </Link>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Linkedin className="h-5 w-5 text-muted-foreground" />
+                            <Link href="https://linkedin.com/" className="text-sm hover:underline">
+                                linkedin.com/
+                            </Link>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Mail className="h-5 w-5 text-muted-foreground" />
+                            <Link href="mailto:ctc3486@gmail.com" className="text-sm hover:underline">
+                                ctc3486@gmail.com
+                            </Link>
+                        </div>
                     </div>
                 </CardContent>
             </Card>
