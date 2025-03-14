@@ -52,8 +52,8 @@ export default function CreditosPage() {
                         </div>
                         <div className="flex items-center gap-2">
                             <Linkedin className="h-5 w-5 text-muted-foreground" />
-                            <Link href="https://www.linkedin.com/in/carlos-ttito-campos-8209852bb/" className="text-sm hover:underline">
-                                linkedin.com/in/carlos-ttito-campos-8209852bb/
+                            <Link href="https://www.linkedin.com/in/carlos-ttito-campos/" className="text-sm hover:underline">
+                                linkedin.com/in/carlos-ttito-campos
                             </Link>
                         </div>
                         <div className="flex items-center gap-2">
