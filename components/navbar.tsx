@@ -28,11 +28,11 @@ export function Navbar() {
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center space-x-2">
                         <NextImage
-                            src="/hospital-logo.svg"
+                            src="/HOSPITAL4.svg"
                             alt="Hospital de Espinar Logo"
-                            width={24}
-                            height={24}
-                            className="h-12 w-12"
+                            width={60}
+                            height={60}
+                            className="h-15 w-15"
                         />
                         <span className="text-xl font-bold">Hospital de Espinar</span>
                     </Link>
