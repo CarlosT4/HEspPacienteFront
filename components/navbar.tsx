@@ -30,9 +30,9 @@ export function Navbar() {
                         <NextImage
                             src="/HOSPITAL4.svg"
                             alt="Hospital de Espinar Logo"
-                            width={60}
-                            height={60}
-                            className="h-15 w-15"
+                            width={50}
+                            height={50}
+                            className="h-13 w-13"
                         />
                         <span className="text-xl font-bold">Hospital de Espinar</span>
                     </Link>
