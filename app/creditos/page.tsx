@@ -14,7 +14,7 @@ export default function CreditosPage() {
                     <div className="flex justify-center">
                         <div className="h-32 w-32 overflow-hidden rounded-full bg-primary/10">
                             <img
-                                src="/placeholder.svg?height=128&width=128"
+                                src="/avatar.png"
                                 alt="Foto del desarrollador"
                                 className="h-full w-full object-cover"
                             />
