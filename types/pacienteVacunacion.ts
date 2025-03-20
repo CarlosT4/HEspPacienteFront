@@ -9,7 +9,6 @@ export type Paciente = {
   apellidoMaterno: string
   primerNombre: string
   segundoNombre: string
-  fechaNacimiento: string
   edad: string
   vacunasRecomendadas: Vacuna[]
   fechaInicio: string

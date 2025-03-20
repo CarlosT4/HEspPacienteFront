@@ -28,7 +28,6 @@ const obtenerEsquemaVacunacionPaciente = async (dni: string): Promise<Paciente> 
         apellidoMaterno: data.ApellidoMaterno,
         primerNombre: data.PrimerNombre,
         segundoNombre: data.SegundoNombre,
-        fechaNacimiento: data.FechaNacimiento,
         edad: data.Edad,
         vacunasRecomendadas: data.VacunasRecomendadas || [],
         fechaInicio: data.FechaInicio,
@@ -166,15 +165,6 @@ export function VacunacionForm() {
                                         </div>
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <div className="space-y-1">
-                                            <p className="text-sm text-muted-foreground">Fecha de Nacimiento</p>
-                                            <p className="font-medium flex items-center gap-2">
-                                                <CalendarIcon size={16} className="text-muted-foreground" />
-                                                {formatearFecha(paciente.fechaNacimiento)}
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
